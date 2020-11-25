@@ -14,8 +14,8 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
-    'title_prefix' => '',
+    'title' => '',
+    'title_prefix' => 'SisVentas | ',
     'title_postfix' => '',
 
     /*
@@ -65,11 +65,11 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_image' => true,
+    'usermenu_desc' => true,
+    'usermenu_profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -248,6 +248,28 @@ return [
             'label'       => 4,
             'label_color' => 'success',
         ],
+        ['header' => 'ALMACEN'],
+        [
+            'text' => 'Categoria',
+            'url'  => 'almacen/categories',
+            // 'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Productos',
+            'url'  => 'almacen/products',
+            // 'icon' => 'fas fa-fw fa-lock',
+        ],
+        ['header' => 'COMPRAS'],
+        [
+            'text' => 'Proveedor',
+            'url'  => 'compras/providers',
+            // 'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Ingresos',
+            'url'  => 'compras/purchases',
+            // 'icon' => 'fas fa-fw fa-lock',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
@@ -351,7 +373,7 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

@@ -18,8 +18,8 @@ class CreateSalesTable extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->foreignId('user_id')->constrained();
             $table->string('type_vou');
-            $table->string('vou_serie');
-            $table->string('vou_num');
+            // $table->string('vou_serie');
+            // $table->string('vou_num');
             $table->float('iva');
             $table->float('total');
             $table->timestamps();
