@@ -10,6 +10,6 @@ class ProviderScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        ($model->type == 'Proveedor')  ? true : false;
+        $builder->has('products');
     }
 }
