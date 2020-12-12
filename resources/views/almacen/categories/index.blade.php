@@ -2,6 +2,7 @@
 
 @section('title', 'Categorias')
 
+
 @section('content_header')
     <h1>{{ __('Categories') }}</h1>
 @stop
@@ -12,6 +13,8 @@
 
     <x-slot name="title">
         {{ __('Categories') }}
+        <a href="{{ route('categories.create') }}" class="btn btn-primary">{{ __('Add Category') }}   </a>
+
     </x-slot>
 
     <x-table>
@@ -31,7 +34,7 @@
                       Accion
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                      <button class="dropdown-item" type="button"> <i class="fa fa-edit"></i> Edit</button>
+                      <a class="dropdown-item" href="{{ route('categories.edit', $category->id) }}"> <i class="fa fa-edit"></i> Edit</a>
                       {{-- <button class="dropdown-item" type="button"><i class="fa fa-barcode"></i>Barra</button> --}}
                       <button class="dropdown-item" type="button"><i class="fa fa-trash"></i>Borrar</button>
                     </div>
@@ -45,7 +48,9 @@
 </x-card>
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
 
+
+
+@section('js')
+@include('includes.alerts')
+@stop

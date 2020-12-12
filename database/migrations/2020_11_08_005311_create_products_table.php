@@ -22,7 +22,6 @@ class CreateProductsTable extends Migration
             $table->string('description')->nullable();
             $table->string('image')->nullable();
             $table->float('price');
-            $table->float('utility');
             $table->string('status')->default('inactico');
             $table->timestamps();
         });

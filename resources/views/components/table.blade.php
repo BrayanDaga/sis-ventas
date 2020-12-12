@@ -10,11 +10,4 @@
         </tbody>
     </table>
 </div>
-@section('js')
-    <script>
-    $(document).ready( function () {
-        $('#myTable').DataTable();
-    } );
 
-    </script>
-@stop

@@ -15,7 +15,6 @@ $factory->define(Product::class, function (Faker $faker) {
         'status' => $faker->randomElement(['inactivo','activo']),
         'category_id' => Category::all()->random()->id,
         'price' => $faker->randomFloat(2,10,1000),
-        'utility' => $faker->numberBetween(1,10),
         'image' => "img/products/{$filename}",
     ];
 });
