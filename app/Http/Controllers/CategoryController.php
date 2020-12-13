@@ -70,9 +70,11 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
-        //
+        $category->update($request->validated());
+        return redirect()->route('categories.index')->withSuccess("La  categoria con id : {$category->id} ha sido actualizada");
+
     }
 
     /**
@@ -83,6 +85,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('categories.index')->withSuccess("La categoria con id : {$category->id} ha sido eliminada");
     }
 }

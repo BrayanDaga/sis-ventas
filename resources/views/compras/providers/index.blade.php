@@ -4,6 +4,7 @@
 
 @section('content_header')
     <h1>{{ __('Providers') }}</h1>
+
 @stop
 
 @section('content')
@@ -12,6 +13,8 @@
 
     <x-slot name="title">
         {{ __('Providers') }}
+        <a href="{{ route('providers.create') }}" class="btn btn-primary">Añadir Proveedor  </a>
+
     </x-slot>
 
     <x-table>
@@ -31,7 +34,10 @@
 </x-card>
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
+@section('js')
+<script>
+    $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>@stop
 

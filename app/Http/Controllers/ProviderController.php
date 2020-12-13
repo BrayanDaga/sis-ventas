@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Person;
+use App\Provider;
 use Illuminate\Http\Request;
 
 class ProviderController extends Controller
@@ -14,7 +14,7 @@ class ProviderController extends Controller
      */
     public function index()
     {
-        $providers = Person::where('type','Proveedor')->get();
+        $providers = Provider::all();
         return view('compras.providers.index',compact('providers'));
     }
 
@@ -25,7 +25,7 @@ class ProviderController extends Controller
      */
     public function create()
     {
-        //
+        return view('compras.providers.create');
     }
 
     /**
@@ -42,10 +42,10 @@ class ProviderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Person  $person
+     * @param  \App\Provider  $provider
      * @return \Illuminate\Http\Response
      */
-    public function show(Person $person)
+    public function show(Provider $provider)
     {
         //
     }
@@ -53,10 +53,10 @@ class ProviderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Person  $person
+     * @param  \App\Provider  $provider
      * @return \Illuminate\Http\Response
      */
-    public function edit(Person $person)
+    public function edit(Provider $provider)
     {
         //
     }
@@ -65,10 +65,10 @@ class ProviderController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Person  $person
+     * @param  \App\Provider  $provider
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Person $person)
+    public function update(Request $request, Provider $provider)
     {
         //
     }
@@ -76,10 +76,10 @@ class ProviderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Person  $person
+     * @param  \App\Provider  $provider
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Person $person)
+    public function destroy(Provider $provider)
     {
         //
     }

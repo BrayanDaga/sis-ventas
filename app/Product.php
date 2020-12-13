@@ -7,14 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    public function providers()
+    public function provider()
     {
-        return $this->belongsToMany(Provider::class, 'provider_id');
+        return $this->belongsTo(Provider::class,'person_id');
     }
-
-    // public function roles()
-    // {
-    //     return $this->belongsToMany('App\Role', 'role_user_table', 'user_id', 'role_id');
-    // }
-
 }

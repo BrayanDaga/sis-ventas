@@ -11,16 +11,18 @@
 <x-card>
 
     <x-slot name="title">
-        {{ __('Categories') }} &nbsp;
+        Editar Categoria: {{ $category->id }} &nbsp;
         <a class="btn btn-info " href="{{ route('categories.index') }}">{{ __('Back') }}</a>
     </x-slot>
+
     <div class="row d-flex justify-content-center">
         <div class="col-10">
-            <form action="{{ route('categories.store') }}" method="post">
+            <form action="{{ route('categories.update',$category->id) }}" method="post">
                 @csrf
+                @method('PUT')
                     <div class="form-group">
                         <label for="name">{{ __('Name') }}</label>
-                        <input id="name" class="form-control" type="text" name="name" placeholder="{{ __('Name') }} ...">
+                        <input id="name" class="form-control" type="text" name="name" placeholder="{{ __('Name') }} ..." value="{{ old('name') ?? $category->name }}" required>
                         @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -30,10 +32,10 @@
 
                     <div class="form-group">
                         <label for="description">{{ __('Description') }}</label>
-                        <input id="description" class="form-control" type="text" name="description" placeholder="{{ __('Description') }} ...">
+                        <input id="description" class="form-control" type="text" name="description" placeholder="{{ __('Description') }} ..." value="{{ old('description') ?? $category->description }}">
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary ">{{ __('Save') }}</button>
+                        <button type="submit" class="btn btn-primary ">{{ __('Uptade') }}</button>
                     </div>
             </form>
         </div>
