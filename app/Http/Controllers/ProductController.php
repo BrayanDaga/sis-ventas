@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Category;
+use App\Provider;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -25,7 +29,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::get(['id','name']);
+        $providers = Provider::get(['id','name']);
+        return view('almacen.products.create',compact('categories','providers'));
     }
 
     /**
@@ -34,9 +40,14 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $data = $request->validated();
+        if($request->has('image')){
+            $data['image'] = Storage::disk('public')->put('img/products',$request->image);
+        }
+        $product = Product::create($data);
+        return redirect()->route('products.index')->withSuccess("El nuevp producto con id : {$product->id} ha sido creado");
     }
 
     /**

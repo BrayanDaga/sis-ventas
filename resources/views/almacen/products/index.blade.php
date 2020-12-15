@@ -12,6 +12,8 @@
 
     <x-slot name="title">
         {{ __('Products') }}
+        <a href="{{ route('products.create') }}" class="btn btn-primary">Añadir Producto </a>
+
     </x-slot>
 
     <x-table>
@@ -62,7 +64,12 @@
 
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-
+@section('js')
+<script>
+    $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+@include('includes.alerts')
 @stop
+

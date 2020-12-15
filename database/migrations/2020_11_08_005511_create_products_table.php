@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('description')->nullable();
             $table->string('image')->nullable();
             $table->float('price');
-            $table->string('status')->default('inactico');
+            $table->string('status')->default('inactivo');
             $table->timestamps();
         });
     }
