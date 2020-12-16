@@ -20,7 +20,7 @@ class CreateDetailpurchasesTable extends Migration
             $table->unsignedInteger('quantity');
             // $table->float('price_sale');
             // $table->float('price_purch');
-            $table->timestamps();
+
         });
     }
 

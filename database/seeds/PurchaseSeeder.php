@@ -1,5 +1,7 @@
 <?php
 
+use App\Purchase;
+use App\Detailpurchase;
 use Illuminate\Database\Seeder;
 
 class PurchaseSeeder extends Seeder
@@ -11,6 +13,12 @@ class PurchaseSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $purchases = factory(Purchase::class,5)
+        ->create()
+        ->each(function ($purchase){
+           factory(Detailpurchase::class,3)->create([
+               'purchase_id' => $purchase->id
+           ]);
+        });
     }
 }

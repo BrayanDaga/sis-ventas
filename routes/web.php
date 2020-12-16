@@ -23,5 +23,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('almacen/categories', 'CategoryController');
 Route::resource('almacen/products', 'ProductController');
-Route::resource('compras/purchases', 'ProductController');
+Route::resource('compras/purchases', 'PurchaseController');
 Route::resource('compras/providers', 'ProviderController');
