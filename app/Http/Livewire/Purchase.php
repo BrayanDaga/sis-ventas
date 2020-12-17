@@ -10,12 +10,18 @@ class Purchase extends Component
 {
     public $price ;
     public $provider;
-    public $quantity;
+    public $quantity = 1;
     public $type_vou;
     public $products=[];
     public $product;
     public $details=[];
     public $total= 0;
+
+
+    public function mount()
+    {
+        $this->provider = Provider::orderBy('name')->pluck('id')->take(1);
+    }
 
     public function render()
     {
@@ -50,7 +56,8 @@ class Purchase extends Component
     }
     public function addRow()
     {
-        $product = explode(',',$this->product);
+        if(isset($this->product)){
+            $product = explode(',',$this->product);
         $data = [
             'prod_id' => $product[0],
             'product' => $product[1],
@@ -73,6 +80,8 @@ class Purchase extends Component
         }
 
         $this->updateTotal();
+
+        }
     }
 
 }
