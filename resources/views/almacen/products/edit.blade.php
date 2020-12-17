@@ -46,9 +46,7 @@
 </x-card>
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
+
 
 @section('js')
     @include('includes.alerts')
