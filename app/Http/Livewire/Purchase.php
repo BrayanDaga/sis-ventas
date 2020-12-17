@@ -31,7 +31,7 @@ class Purchase extends Component
         $this->price = $product[2];
     }
 
-  
+
 
     public function delRow(int $row)
     {
@@ -51,30 +51,28 @@ class Purchase extends Component
     public function addRow()
     {
         $product = explode(',',$this->product);
-            array_push($this->details,[
+        $data = [
             'prod_id' => $product[0],
             'product' => $product[1],
             'quantity' => $this->quantity,
             'precioU' => $this->price,
             'subtotal' => $product[2] * $this->quantity ,
-        ]);
-        $this->addNotRepeat();
+        ];
+        $exist = false;
+        for ($i=0; $i < count($this->details) ; $i++) {
+            if($this->details[$i]['prod_id'] == $data['prod_id'])
+            {
+                $this->details[$i]['quantity']+= $data['quantity'];
+                $this->details[$i]['subtotal']+= $data['subtotal'];
+                $exist = true;
+            }
+        }
+
+        if(!$exist){
+            array_push($this->details,$data);
+        }
 
         $this->updateTotal();
     }
-    public function addNotRepeat()
-    {
-        for ($i=0; $i < count($this->details)-1; $i++) {   
-            if($this->details[$i]['prod_id'] == $this->details[$i+1]['prod_id'])
-            {
-                $this->details[$i]['quantity']+= $this->details[$i+1]['quantity'];
-                $this->details[$i]['subtotal']+= $this->details[$i+1]['subtotal'];
-                unset($this->details[$i+1]);
-            }
-        }
-        // foreach ($this->details as $detail) {
-        //     $detail[]
-        // }
 
-    }
 }
