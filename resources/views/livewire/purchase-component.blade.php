@@ -16,7 +16,6 @@
                 <option value="factura">Factura</option>
                 <option value="ticket">Ticket</option>
             </select>
-            {{ $type_vou }}
 
         </div>
 
@@ -30,7 +29,9 @@
                  @endforeach
                  <option    disabled selected>Choose a proveedor</option>
             </select>
-            {{ $provider }}
+            <span>Por favor una vez que haya añadido productos no cambie de proveedor</span>
+
+
         </div>
 
         <div class="p-3 m-8">

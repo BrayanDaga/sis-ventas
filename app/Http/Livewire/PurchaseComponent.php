@@ -19,7 +19,6 @@ class PurchaseComponent extends Component
     public $details=[];
     public $total= 0;
 
-
     public function mount()
     {
         $this->type_vou = 'boleta';
@@ -40,7 +39,15 @@ class PurchaseComponent extends Component
         $this->price = $product[2];
     }
 
+    public function updatedProvider()
+    {
+        $this->price = '';
 
+        if(count($this->details)>0){
+            $this->details=[];
+        }
+
+    }
 
     public function delRow(int $row)
     {
@@ -59,7 +66,7 @@ class PurchaseComponent extends Component
     }
     public function addRow()
     {
-        if(isset($this->product)){
+        if(isset($this->product) &&  $this->price != null){
             $product = explode(',',$this->product);
         $data = [
             'prod_id' => $product[0],
