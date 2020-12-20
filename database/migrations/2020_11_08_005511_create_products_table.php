@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('stock');
             $table->string('description')->nullable();
             $table->string('image')->nullable();
-            $table->float('price');
+            $table->unsignedFloat('price');
             $table->string('status')->default('inactivo');
             $table->timestamps();
         });

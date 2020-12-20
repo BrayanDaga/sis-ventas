@@ -18,6 +18,8 @@ class CreateDetailpurchasesTable extends Migration
             $table->foreignId('purchase_id')->constrained();
             $table->foreignId('product_id')->constrained();
             $table->unsignedInteger('quantity');
+            $table->unsignedFloat('price');
+            $table->unsignedFloat('subtotal');
             // $table->float('price_sale');
             // $table->float('price_purch');
 

@@ -18,7 +18,7 @@
     </x-slot>
 
 
-    @livewire('purchase')
+    @livewire('purchase-component')
 
 </x-card>
 @stop

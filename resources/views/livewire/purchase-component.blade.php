@@ -1,26 +1,36 @@
 <div>
 
+    @if (session()->has('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+    @endif
+
     <div class="row">
 
         <div class="p-3 m-8">
             <label class="inline-block w-32 font-bold">Tipo Voucher: </label>
              <select name="type_vou" wire:model="type_vou"  class="p-2 bg-white border shadow">
                 <option disabled selected>Seleccione tipo voucher</option>
-                <option>Boleta</option>
-                <option>Factura</option>
-                <option>Ticket</option>
+                <option value="boleta">Boleta</option>
+                <option value="factura">Factura</option>
+                <option value="ticket">Ticket</option>
             </select>
+            {{ $type_vou }}
+
         </div>
 
         <div class="p-3 m-8">
 
             <label class="inline-block w-32 font-bold">Proveedor: </label>
+
              <select name="provider" wire:model="provider"  class="p-2 bg-white border shadow"  id="provider">
                  @foreach($providers as $item)
                  <option value={{ $item->id }}>{{ $item->name }}</option>
                  @endforeach
                  <option    disabled selected>Choose a proveedor</option>
             </select>
+            {{ $provider }}
         </div>
 
         <div class="p-3 m-8">
@@ -44,7 +54,8 @@
         </div>
 
         <div class="p-3 m-8">
-                <button class="btn btn-success btn-block" wire:click="addRow">Añadir</button>
+
+            <button class="btn btn-success btn-block" wire:click="addRow">Añadir</button>
         </div>
         <x-table>
             <x-slot name="thead">
@@ -59,7 +70,7 @@
                 <td>
                     <button class="btn btn-warning" wire:click="delRow({{ $key }})">X</button>
                 </td>
-                <td>{{ $detail['product'] }}</td>
+                <td>{{ $detail['product'] }} | {{ $detail['prod_id'] }} </td>
                 <td>{{ $detail['quantity'] }}</td>
                 <td>{{ $detail['precioU'] }}</td>
                 <td>{{ $detail['subtotal'] }}</td>
@@ -75,7 +86,9 @@
         </x-table>
     <div>
 
+        @if (isset($details) && $details!=null)
+            <button class="btn btn-primary btn-lg" wire:click="storePurchase">Realizar Compra</button>
 
-
+        @endif
 
 </div>

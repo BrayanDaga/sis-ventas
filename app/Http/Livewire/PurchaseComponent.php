@@ -4,9 +4,11 @@ namespace App\Http\Livewire;
 
 use App\Product;
 use App\Provider;
+use App\Purchase;
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
 
-class Purchase extends Component
+class PurchaseComponent extends Component
 {
     public $price ;
     public $provider;
@@ -20,7 +22,8 @@ class Purchase extends Component
 
     public function mount()
     {
-        $this->provider = Provider::orderBy('name')->pluck('id')->take(1);
+        $this->type_vou = 'boleta';
+        $this->provider = Provider::orderBy('name')->pluck('id')->first();
     }
 
     public function render()
@@ -28,7 +31,7 @@ class Purchase extends Component
         if(!empty($this->provider)) {
             $this->products = Product::where('person_id', $this->provider)->get();
         }
-        return view('livewire.purchase')->withProviders(Provider::orderBy('name')->get());
+        return view('livewire.purchase-component')->withProviders(Provider::orderBy('name')->get());
     }
 
     public function updatedProduct()
@@ -82,6 +85,35 @@ class Purchase extends Component
         $this->updateTotal();
 
         }
+    }
+
+    public function storePurchase()
+    {
+
+        DB::transaction(function () {
+            $purchase  = Purchase::create([
+                'provider_id' => $this->provider,
+                'user_id' => auth()->user()->id,
+                'type_vou' => $this->type_vou,
+                'iva' => 1.8,
+                'total' => $this->total
+            ]);
+
+
+
+            foreach ($this->details as $key => $detail) {
+                $purchase->detailsPurchases()->create([
+                    'purchase_id' => $purchase->id,
+                    'product_id' => $detail['prod_id'],
+                    'quantity' => $detail['quantity'],
+                    'price' => $detail['precioU'],
+                    'subtotal' => $detail['subtotal']
+                ]);
+            }
+
+        }, 5);
+        session()->flash('success', 'Compra realizada con exito');
+        return redirect()->to('/compras/purchases');
     }
 
 }

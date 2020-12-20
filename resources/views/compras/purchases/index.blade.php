@@ -46,5 +46,7 @@
     $(document).ready( function () {
     $('#myTable').DataTable();
 } );
-</script>@stop
+</script>
+@include('includes.alerts')
+@stop
 
