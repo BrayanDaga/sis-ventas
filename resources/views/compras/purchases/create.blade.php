@@ -6,7 +6,9 @@
     <h1>{{ __('Providers') }}</h1>
 @stop
 
-
+@section('css')
+@livewireStyles
+@stop
 
 @section('content')
 
