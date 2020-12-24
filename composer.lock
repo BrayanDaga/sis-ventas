@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "db32542e7a4eeae4df1bc2a4a969984c",
+    "content-hash": "142af3d81fb46fd7b0ee0103e0f84707",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -931,16 +931,16 @@
         },
         {
             "name": "jeroennoten/laravel-adminlte",
-            "version": "v3.5.0",
+            "version": "v3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jeroennoten/Laravel-AdminLTE.git",
-                "reference": "baa10b8b0c3bd085a7e6cd5a62d5b5aa25d3ccfb"
+                "reference": "2d89430b68fdc72a126a160bf068125cc14ba626"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jeroennoten/Laravel-AdminLTE/zipball/baa10b8b0c3bd085a7e6cd5a62d5b5aa25d3ccfb",
-                "reference": "baa10b8b0c3bd085a7e6cd5a62d5b5aa25d3ccfb",
+                "url": "https://api.github.com/repos/jeroennoten/Laravel-AdminLTE/zipball/2d89430b68fdc72a126a160bf068125cc14ba626",
+                "reference": "2d89430b68fdc72a126a160bf068125cc14ba626",
                 "shasum": ""
             },
             "require": {
@@ -984,22 +984,22 @@
             ],
             "support": {
                 "issues": "https://github.com/jeroennoten/Laravel-AdminLTE/issues",
-                "source": "https://github.com/jeroennoten/Laravel-AdminLTE/tree/v3.5.0"
+                "source": "https://github.com/jeroennoten/Laravel-AdminLTE/tree/v3.5.1"
             },
-            "time": "2020-09-26T21:28:24+00:00"
+            "time": "2020-12-09T15:58:39+00:00"
         },
         {
             "name": "laravel/framework",
-            "version": "v7.30.0",
+            "version": "v7.30.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "629c36a0fe87b66d8dccd3c82927950d0f59d3f9"
+                "reference": "e73855b18dcfc645c36d2474f437e4e73dd3c11d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/629c36a0fe87b66d8dccd3c82927950d0f59d3f9",
-                "reference": "629c36a0fe87b66d8dccd3c82927950d0f59d3f9",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/e73855b18dcfc645c36d2474f437e4e73dd3c11d",
+                "reference": "e73855b18dcfc645c36d2474f437e4e73dd3c11d",
                 "shasum": ""
             },
             "require": {
@@ -1148,7 +1148,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2020-12-01T15:01:25+00:00"
+            "time": "2020-12-22T17:00:45+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -7519,8 +7519,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.2.5|^8.0",
-        "ext-pdo_sqlite": "*"
+        "php": "^7.2.5|^8.0"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
