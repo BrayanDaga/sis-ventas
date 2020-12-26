@@ -24,6 +24,7 @@
             <th>{{ __('Stock') }}</th>
             <th>{{ __('Status') }}</th>
             <th>{{ __('Price') }}</th>
+            <th>{{ __('Category') }}</th>
             <th></th>
         </x-slot>
         @foreach ($products as $product)
@@ -42,6 +43,7 @@
                     @endif
             </td>
             <td>{{ $product->price }}</td>
+            <td>{{ $product->category->name ?? '' }}</td>
             <td>
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
