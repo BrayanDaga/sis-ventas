@@ -1,53 +1,185 @@
 @extends('adminlte::page')
 
-@section('title', 'Categorias')
+@section('title', 'PRoductos')
 
 @section('content_header')
-    <h1>{{ __('Categories') }}</h1>
+   <div class="d-flex justify-content-sm-between">
+    <h1><i class="fa fa-edit"></i>  Editar  producto   </h1>
+    <a class="btn btn-info " href="{{ route('products.index') }}">{{ __('Back') }}</a>
+   </div>
 @stop
+
+
 
 @section('content')
 
-<x-card>
 
-    <x-slot name="title">
-        Editar Categoria: {{ $category->id }} &nbsp;
-        <a class="btn btn-info " href="{{ route('categories.index') }}">{{ __('Back') }}</a>
-    </x-slot>
 
-    <div class="row d-flex justify-content-center">
-        <div class="col-10">
-            <form action="{{ route('categories.update',$category->id) }}" method="post">
-                @csrf
-                @method('PUT')
-                    <div class="form-group">
-                        <label for="name">{{ __('Name') }}</label>
-                        <input id="name" class="form-control" type="text" name="name" placeholder="{{ __('Name') }} ..." value="{{ old('name') ?? $category->name }}" required>
-                        @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+    <form action="{{ route('products.update',['product' => $product->id]) }}" method="post" enctype="multipart/form-data">
+        @method('PUT')
+    @csrf
+    <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <img class="img-fluid" id="preview" src="{{ asset($product->image )}}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Nombre de Producto</label>
+                            <input id="name" class="form-control @error('name') is-invalid @enderror" type="text" name="name" placeholder="{{ __('Name') }} ..." value="{{ old('name') ?? $product->name }}" >
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+
+                            <label>Categoria</label>
+
+                            <select name="category_id" id="category" class="form-control @error('status') is-invalid @enderror">
+                                <option disabled selected >Seleccione categoria...</option>
+                                @foreach ($categories as $category)
+                                    @if ($product->category_id == $category->id)
+                                     <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                                    @else
+                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="description">{{ __('Description') }}</label>
-                        <input id="description" class="form-control" type="text" name="description" placeholder="{{ __('Description') }} ..." value="{{ old('description') ?? $category->description }}">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Proveedor</label>
+                            <select id="provider" class="form-control" name="person_id" >
+                                <option disabled selected>Seleccione proveedor ....</option>
+                                @foreach ($providers as $provider)
+                                    @if ($product->person_id == $provider->id)
+                                        <option value="{{ $provider->id }}" selected>{{ $provider->name }}</option>
+                                     @else
+                                        <option value="{{ $provider->id }}">{{ $provider->name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary ">{{ __('Uptade') }}</button>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+
+                        <label>Stock</label>
+                            <input id="stock" class="form-control @error('stock') is-invalid @enderror" type="number"  min="0" name="stock" placeholder="{{ __('stock') }} ..." value="{{ old('stock') ?? $product->stock }}" >
+
+                            @error('stock')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+
+                        </div>
                     </div>
-            </form>
+                    <div class="col-md-4">
+                        <label>Descripcion</label>
+                        <div class="form-group">
+                            <textarea id="description" class="form-control" name="description" placeholder="descripcion ..." value="{{ old('description') ?? $product->description }}"></textarea>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+
+                            <label>Precio</label>
+                                <input id="price" class="form-control @error('price') is-invalid @enderror" type="number"  min="0.00" step="0.01" name="price" placeholder="{{ __('price') }} ..." value="{{ old('price') ?? $product->price }}" >
+
+                                @error('price')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+                            </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+
+                            <label>Estado</label>
+                            <select name="status" id="status" class="form-control">
+                                <option {{ old('status') == 'inactivo' ? 'selected' : ($product->status == 'inactivo' ? 'selected' : '') }} value="inactivo">inactivo</option>
+                                <option {{ old('status') == 'activo' ? 'selected' : ($product->status == 'activo' ? 'selected' : '') }} value="activo">Activo</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>Imagen de Producto</label>
+                                {{-- <img class="img-thumbnail" id="preview"  alt="" width="250"> --}}
+                                <input type="file" name="image" id="file" accept="image/*">
+                                @error('file')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">{{ __('update') }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
+    </form>
 
-    <div>
 
-
-</x-card>
 @stop
 
-
-
 @section('js')
-    @include('includes.alerts')
+    <script>
+        $(document).ready(function() {
+            $('#category').select2();
+            $('#provider').select2();
+
+
+            $('#file').change(function(e) {
+            addImage(e);
+            });
+
+            function addImage(e){
+            var file = e.target.files[0],
+            imageType = /image.*/;
+
+            if (!file.type.match(imageType))
+            return;
+
+            var reader = new FileReader();
+            reader.onload = fileOnload;
+            reader.readAsDataURL(file);
+            }
+
+            function fileOnload(e) {
+            var result=e.target.result;
+            $('#preview').attr("src",result);
+            }
+
+        });
+
+    </script>
 @stop

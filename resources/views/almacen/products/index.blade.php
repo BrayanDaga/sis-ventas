@@ -50,9 +50,17 @@
                       Accion
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                      <button class="dropdown-item" type="button"> <i class="fa fa-edit"></i> Edit</button>
-                      {{-- <button class="dropdown-item" type="button"><i class="fa fa-barcode"></i>Barra</button> --}}
-                      <button class="dropdown-item" type="button"><i class="fa fa-trash"></i>Borrar</button>
+                      <a class="dropdown-item" href="{{ route('products.edit', $product->id) }}"> <i class="fa fa-edit"></i> Edit</a>
+
+                      <a class="dropdown-item" href="{{ route('products.destroy',$product->id) }}"
+                        onclick="event.preventDefault();
+                                      document.getElementById('delete').submit();">
+                                  <i class="fa fa-trash"></i>Borrar
+                      </a>
+                      <form id="delete" action="{{ route('products.destroy',$product->id) }}" method="POST" class="d-none" style="display:none">
+                        @method('DELETE')
+                        @csrf
+                    </form>
                     </div>
                   </div>
             </td>

@@ -7,6 +7,7 @@ use App\Category;
 use App\Provider;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -43,9 +44,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $data = $request->validated();
-        if($request->has('image')){
             $data['image'] = Storage::disk('public')->put('img/products',$request->image);
-        }
         $product = Product::create($data);
         return redirect()->route('products.index')->withSuccess("El nuevp producto con id : {$product->id} ha sido creado");
     }
@@ -69,7 +68,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $categories = Category::get(['id','name']);
+        $providers = Provider::get(['id','name']);
+        return view('almacen.products.edit',compact('categories','providers','product'));
     }
 
     /**
@@ -79,9 +80,16 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $data = $request->validated();
+         if($request->has('image')){
+            Storage::delete($product->iamge);
+             $data['image'] = Storage::disk('public')->put('img/products',$request->image);
+        }
+         $product->update($data);
+         return redirect()->route('products.index')->withSuccess("El  producto con id : {$product->id} ha sido actualizado");
+
     }
 
     /**
@@ -92,6 +100,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        Storage::delete($product->image);
+        $product->delete();
+        return redirect()->route('products.index')->withSuccess("El producto con id : {$product->id} ha sido eliminado");
     }
 }

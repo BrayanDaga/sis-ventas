@@ -106,16 +106,12 @@
                         <div class="form-group">
 
                             <label>Estado</label>
-                            <select name="status" id="status" class="form-control @error('status') is-invalid @enderror">
-                                <option value="inactivo">Inactivo</option>
-                                <option value="activo">Activo</option>
+                            <select name="status" id="status" class="form-control">
+                                <option {{ old('status') == 'inactivo' ? 'selected' : '' }}  value="inactivo">inactivo</option>
+                                <option {{ old('status') == 'activo' ? 'selected' : '' }} value="activo">activo</option>
+
                             </select>
 
-                                @error('status')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
 
                         </div>
                     </div>
