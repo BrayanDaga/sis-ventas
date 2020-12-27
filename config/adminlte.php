@@ -376,6 +376,16 @@ return [
 
             ],
         ],
+        'Turbolinks' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js',
+                ],
+            ],
+        ],
         'Pace' => [
             'active' => true,
             'files' => [

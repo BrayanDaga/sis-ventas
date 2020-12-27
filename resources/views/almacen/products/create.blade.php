@@ -41,13 +41,16 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
+
                             <label>Categoria</label>
-                            <select id="category" class="form-control" name="category_id">
-                                <option disabled selected>Seleccione categoria ....</option>
+
+                            <select name="category_id" id="category" class="form-control @error('status') is-invalid @enderror">
+                                <option disabled selected >Seleccione categoria ....</option>
                                 @foreach ($categories as $category)
                                 <option value="{{ $category->id  }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
+
                         </div>
                     </div>
 
@@ -60,34 +63,60 @@
                                 <option value="{{ $provider->id  }}">{{ $provider->name }}</option>
                                 @endforeach
                             </select>
+
                         </div>
                     </div>
 
                     <div class="col-md-4">
-                        <label>Stock</label>
                         <div class="form-group">
-                            <input id="stock" class="form-control"  type="number" name="stock" placeholder="{{ __('stock') }} ..."  value="{{ old('stock') }}" min="0" >
+
+                        <label>Stock</label>
+                            <input id="stock" class="form-control @error('stock') is-invalid @enderror" type="number"  min="0" name="stock" placeholder="{{ __('stock') }} ..." value="{{ old('stock') }}" >
+
+                            @error('stock')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+
                         </div>
                     </div>
                     <div class="col-md-4">
                         <label>Descripcion</label>
                         <div class="form-group">
-                            <textarea id="description" class="form-control" name="description" placeholder="descripcion ..."></textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <label>Precio</label>
-                        <div class="form-group">
-                            <input id="price" class="form-control"  type="number" name="price" placeholder="{{ __('price') }} ..."  value="{{ old('price') }}" min="0.00" step="0.01">
+                            <textarea id="description" class="form-control" name="description" placeholder="descripcion ..." value="{{ old('description') }}"></textarea>
+
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
+
+                            <label>Precio</label>
+                                <input id="price" class="form-control @error('price') is-invalid @enderror" type="number"  min="0.00" step="0.01" name="price" placeholder="{{ __('price') }} ..." value="{{ old('price') }}" >
+
+                                @error('price')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+                            </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+
                             <label>Estado</label>
-                            <select name="status" id="status" class="form-control">
+                            <select name="status" id="status" class="form-control @error('status') is-invalid @enderror">
                                 <option value="inactivo">Inactivo</option>
                                 <option value="activo">Activo</option>
                             </select>
+
+                                @error('status')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -96,7 +125,11 @@
                                 <label>Imagen de Producto</label>
                                 {{-- <img class="img-thumbnail" id="preview"  alt="" width="250"> --}}
                                 <input type="file" name="image" id="file" accept="image/*">
-
+                                @error('file')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                             </div>
                         </div>
                     </div>
@@ -118,13 +151,10 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            $('#category').select2({
-                language: "es"
-            });
+            $('#category').select2();
             $('#provider').select2();
 
 
-            $(function() {
             $('#file').change(function(e) {
             addImage(e);
             });
@@ -145,7 +175,6 @@
             var result=e.target.result;
             $('#preview').attr("src",result);
             }
-            });
 
         });
 

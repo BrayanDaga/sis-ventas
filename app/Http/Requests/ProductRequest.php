@@ -29,7 +29,7 @@ class ProductRequest extends FormRequest
             'price' => 'required| min:1',
             'stock' => 'required| min:0',
             'status' => 'required| in:activo,inactivo',
-            'image' => 'nullable| image',
+            'image' => 'image',
             'category_id' => 'required',
             'person_id' => 'required',
         ];
