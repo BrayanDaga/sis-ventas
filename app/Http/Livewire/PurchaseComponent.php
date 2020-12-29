@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 class PurchaseComponent extends Component
 {
     public $price ;
+    public $image ;
     public $provider;
     public $quantity = 1;
     public $type_vou;
@@ -37,6 +38,7 @@ class PurchaseComponent extends Component
     {
         $product = explode(',',$this->product);
         $this->price = $product[2];
+        $this->image = $product[3];
     }
 
     public function updatedProvider()
@@ -71,6 +73,7 @@ class PurchaseComponent extends Component
         $data = [
             'prod_id' => $product[0],
             'product' => $product[1],
+            'image' => $this->image,
             'quantity' => $this->quantity,
             'precioU' => $this->price,
             'subtotal' => $product[2] * $this->quantity ,
@@ -116,6 +119,9 @@ class PurchaseComponent extends Component
                     'price' => $detail['precioU'],
                     'subtotal' => $detail['subtotal']
                 ]);
+                $product = Product::find($detail['prod_id']);
+                $product->stock += $detail['quantity'];
+                $product->update();
             }
 
         }, 5);

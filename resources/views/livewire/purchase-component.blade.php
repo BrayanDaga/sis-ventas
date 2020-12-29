@@ -40,11 +40,13 @@
                     class="p-2 px-4 py-2 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline" id="product">
 
                     @foreach($products as $item)
-                    <option value={{ $item->id.','.$item->name.','. $item->price }}>{{ $item->name }}</option>
+                    <option value={{ $item->id.','.$item->name.','. $item->price.','.$item->image }}>{{ $item->name }}</option>
                     @endforeach
                 </select>
         </div>
-
+        @if (isset($product) && $product!=null)
+        <img src="{{ asset($image) }}" alt="Product Image" class="img-rounded" width="80">
+        @endif
         <div class="p-3 m-8">
             <label class="inline-block w-32 font-bold">Precio:</label>
             <input class="p-2 px-4 py-2 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline" type="text"  disabled value="{{ $price }}" >
@@ -61,6 +63,8 @@
         <x-table>
             <x-slot name="thead">
                 <th></th>
+                <th>Id</th>
+                {{-- <th>image</th> --}}
                 <th>Articulo</th>
                 <th>Cantidad</th>
                 <th>Precio U</th>
@@ -71,16 +75,18 @@
                 <td>
                     <button class="btn btn-warning" wire:click="delRow({{ $key }})">X</button>
                 </td>
-                <td>{{ $detail['product'] }} | {{ $detail['prod_id'] }} </td>
-                <td>{{ $detail['quantity'] }}</td>
+                <td>{{ $detail['prod_id'] }} </td>
+                {{-- <td>
+                    <img src="{{ asset($detail['image'] )}}" alt="Product Image" class="img-rounded" width="60">
+                </td> --}}
+                <td>{{ $detail['product'] }} </td>
+                 <td>{{ $detail['quantity'] }}</td>
                 <td>{{ $detail['precioU'] }}</td>
                 <td>{{ $detail['subtotal'] }}</td>
             </tr>
             @endforeach
             <tfoot>
-                <th></th>
-                <th></th>
-                <th> </th>
+                <th colspan="4"></th>
                 <th>Total:</th>
                 <th> S/. {{ $total }}</th>
             </tfoot>
