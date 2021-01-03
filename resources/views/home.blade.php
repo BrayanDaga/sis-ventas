@@ -9,6 +9,7 @@
 
 @section('content')
     <div class="row">
+
       <div class="col-md-6">
         <!-- AREA CHART -->
         <div class="card card-primary">
@@ -109,27 +110,59 @@ var areaChart = new Chart(areaCanva, {
 });
 
 
-var lineCanva          = $('#lineChart').get(0).getContext('2d')
-var myLineChart = new Chart(lineCanva, {
-    type: 'line',
-    data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [
-        {
-          label               : 'Electronics',
+var lineCanva          = $('#lineChart').get(0).getContext('2d');
 
-          data                : [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-            label               : 'Digital Goods',
-            backgroundColor :     'rgba(54, 162, 235, 0.2)',
+var dataFirst = {
+  label: "Car A - Speed (mph)",
+  data: [0, 59, 75, 20, 20, 55, 40],
+ lineTension: 0,
+    fill: false,
+    borderColor: 'orange',
+    backgroundColor: 'transparent',
+    borderDash: [5, 5],
+    pointBorderColor: 'orange',
+    pointBackgroundColor: 'rgba(255,150,0,0.5)',
+    pointRadius: 5,
+    pointHoverRadius: 10,
+    pointHitRadius: 30,
+    pointBorderWidth: 2,
+    pointStyle: 'rectRounded'
 
-          data                : [28, 48, 40, 19, 86, 27, 90]
-        }
-      ]
-    }
 
-});
+  // Set More Options
+};
+
+var dataSecond = {
+  label: "Car B - Speed (mph)",
+  data: [20, 15, 60, 60, 65, 30, 70],
+  lineTension: 0,
+    fill: false,
+    borderColor: 'blue',
+    backgroundColor: 'transparent',
+    borderDash: [5, 5],
+    pointBorderColor: 'blue',
+    pointBackgroundColor: 'rgba(255,150,0,0.5)',
+    pointRadius: 5,
+    pointHoverRadius: 10,
+    pointHitRadius: 30,
+    pointBorderWidth: 2,
+    pointStyle: 'rectRounded'
+
+
+  // Set More Options
+};
+
+var speedData = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  datasets: [dataFirst, dataSecond,]
+};
+
+
+var lineChart = new Chart(lineCanva, {
+type: 'line',
+  data: speedData
+})
+
 
 var pieCanvas = $('#pieChart').get(0).getContext('2d')
 var myPieChart = new Chart(pieCanvas, {
